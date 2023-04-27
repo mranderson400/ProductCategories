@@ -1,0 +1,41 @@
+@model Product
+
+<div class="container text-center w-75 mx-auto">
+<h1>@Model.Name</h1>
+
+<div class="row">
+
+<div class="d-flex  mt-5">
+    <div class='col-6'>
+        <h3>Categories</h3>
+        <ul style='list-style:none'>
+            @{
+                foreach(Relation r in Model.Relationships)
+                {
+                    <li>@r.Category.Name</li>
+                }
+            }
+        </ul>
+    </div>
+
+    <div class='col-6'>
+        <h3>Add a Category</h3>
+<form method="post" asp-action="AddCatToProd" asp-controller="Product">
+            <select name="CategoryId">
+                @{
+                    foreach (Category c in ViewBag.categorylist)
+                    {
+                        <option value='@c.CategoryId'>@c.Name</option>
+                    }
+                }
+            </select>
+            <input type="hidden" name="ProductId" value="@Model.ProductId">
+        <button type="submit">Add</button>
+</form>      
+</div>
+    </div>
+</div>
+    
+
+
+</div>
